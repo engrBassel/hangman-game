@@ -1,0 +1,254 @@
+/* variables start */
+:root {
+  --main-color: #ebdfb6;
+  --sec-color: #1f1f1f;
+  --right-color: #adff2f;
+  --wrong-color: #f00;
+}
+/* variables end */
+/* global rules start */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-user-select: none;
+  user-select: none;
+}
+body {
+  font-family: monospace, sans-serif;
+  background-color: var(--sec-color);
+  color: #fff;
+}
+.game {
+  padding: 1rem;
+}
+@media (min-width: 62em) {
+  .game {
+    margin: 0 auto;
+    width: 70%;
+    padding: 2rem;
+  }
+}
+.right {
+  color: var(--right-color);
+}
+.wrong {
+  color: var(--wrong-color);
+}
+.header,
+.footer {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+/* global rules end */
+/* header start */
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 1rem;
+}
+@media (max-width: 35.249em) {
+  .header {
+    justify-content: center;
+  }
+}
+.header .game-name,
+.header .category span {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: var(--main-color);
+}
+.header .game-name {
+  font-size: 2.5rem;
+}
+.header .category span {
+  font-size: 1.5rem;
+}
+/* header end */
+/* main start */
+.main {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  min-height: 382px;
+  padding: 1rem 0;
+}
+.main.finish {
+  font-size: clamp(2rem, 15svw, 4rem);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+@media (max-width: 41.99em) {
+  .main {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+.main .hangman,
+.main .hangman .the-stand {
+  position: relative;
+}
+.main .hangman {
+  min-width: 250px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.main .hangman .the-stand {
+  display: none;
+  width: 20px;
+  height: 350px;
+  background-color: #fff;
+}
+.main .hangman .the-stand::before,
+.main .hangman .the-stand::after {
+  content: "";
+  position: absolute;
+  height: 15px;
+  background-color: #fff;
+}
+.main .hangman .the-stand::before {
+  left: -100%;
+  bottom: -15px;
+  width: 60px;
+}
+.main .hangman .the-stand::after {
+  top: -15px;
+  width: 150px;
+}
+.main .hangman .the-hang {
+  position: absolute;
+  top: 0;
+  left: 130px;
+  width: 3px;
+  height: 40px;
+  background-color: #fff;
+  display: none;
+}
+.main .hangman .the-rope,
+.main .hangman .the-man .head {
+  position: absolute;
+  display: none;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+}
+.main .hangman .the-rope {
+  top: 40px;
+  left: 90px;
+  width: 80px;
+  height: 80px;
+  border: 3px dotted #fff;
+}
+.main .hangman .the-man .head,
+.main .hangman .the-man .body,
+.main .hangman .the-man .hands,
+.main .hangman .the-man .legs {
+  display: none;
+}
+.main .hangman .the-man .head {
+  top: 50px;
+  left: 100px;
+  width: 60px;
+  height: 60px;
+  border: 5px solid #fff;
+}
+.main .hangman .the-man .body {
+  position: absolute;
+  top: 109px;
+  left: 128px;
+  width: 5px;
+  height: 150px;
+  background-color: #fff;
+}
+.main .hangman .the-man .hands,
+.main .hangman .the-man .legs {
+  position: absolute;
+  left: 91px;
+  width: 80px;
+  height: 80px;
+  border-width: 5px;
+  border-style: solid;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+.main .hangman .the-man .hands {
+  top: 82px;
+  border-color: transparent transparent #fff #fff;
+}
+.main .hangman .the-man .legs {
+  bottom: 0;
+  border-color: #fff #fff transparent transparent;
+}
+.main .letters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: clamp(1rem, 3svw, 2rem);
+}
+.main .letters span {
+  padding: 0.5em;
+  background-color: #fff;
+  color: var(--sec-color);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+}
+@media (min-width: 64em) {
+  .main .letters span {
+    cursor: pointer;
+  }
+}
+.main .letters span:hover {
+  background-color: var(--main-color);
+}
+/* adding hover because at click you are hovering the span */
+.main .letters span.bg-right,
+.main .letters span.bg-right:hover {
+  background-color: var(--right-color);
+}
+.main .letters span.bg-wrong,
+.main .letters span.bg-wrong:hover {
+  background-color: var(--wrong-color);
+}
+.main .letters span.clicked {
+  pointer-events: none;
+  opacity: 0.4;
+  background-color: #fff;
+}
+/* main end */
+/* footer start */
+.footer .word {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  font-size: clamp(1rem, 3svw, 2rem);
+  color: var(--sec-color);
+}
+.footer .word span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.5em;
+  height: 2em;
+  padding: 0.5em;
+  background-color: var(--main-color);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+}
+/* footer end */
